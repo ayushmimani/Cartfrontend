@@ -77,12 +77,6 @@ const Cartpage = () => {
 
   }
 
-  // const orderplaced =async()=>{
-  //    const response = await axios.post('http://localhost:8000/api/orderplaced',);
-
-  // }
-
-
   return (
     <>
     {userloggedin && 
@@ -99,11 +93,13 @@ const Cartpage = () => {
               <input type='checkbox' 
               checked={selectedorder.includes(item.product.id)}
               onChange={()=>handleselecteditem(item.product.id)}/>
-              {/* <img
-                src={item.image}
-                alt={item.name}
-                className="w-20 h-20 object-cover rounded-md"
-              /> */}
+               <div className="flex-shrink-0">
+                  <img
+                    src={`http://localhost:8000/storage/${item.product.image}`}
+                    alt={item.name}
+                    className="w-24 h-24 object-cover rounded-md border border-gray-200"
+                  />
+               </div>
               <div className="flex flex-col ml-4">
                 <h2 className="font-semibold text-lg">{item.product.productname}</h2>
                 <p className="text-gray-600">${item.product.price}</p>

@@ -20,6 +20,7 @@ import UserProfile from './Components/Ecommerce/user/UserProfile.jsx'
 import MemberProfile from './Components/Ecommerce/Member/MemberProfile.jsx'
 import Orderlisting from './Components/Ecommerce/Member/Orderlisting.jsx'
 import Productinglisting from './Components/Ecommerce/Member/Productinglisting.jsx'
+import Productinfo from './Components/Ecommerce/user/Productinfo.jsx'
 
 
 // createRoot(document.getElementById('root')).render(
@@ -43,7 +44,7 @@ import Productinglisting from './Components/Ecommerce/Member/Productinglisting.j
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+
     <BrowserRouter>
         <Routes>
             <Route path='/' element={<App/>}>
@@ -60,13 +61,14 @@ createRoot(document.getElementById('root')).render(
 
                      <Route path='userprofile' element={<UserProfile/>}/>
                      <Route path='memberprofile' element={<MemberProfile/>}/>
+                     <Route path='productinfo/:id' element={<Productinfo/>}/>
 
                      <Route path='memberorderlist' element={<Orderlisting/>}/>
                      <Route path='memberproductlist' element={<Productinglisting/>}/>
             </Route>
         </Routes>
     </BrowserRouter>
-  </StrictMode>
+
 );
 
 

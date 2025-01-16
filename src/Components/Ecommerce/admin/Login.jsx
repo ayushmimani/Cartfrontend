@@ -30,24 +30,24 @@ const login = () => {
             e.preventDefault();
             try{
             const response = await axios.post('http://localhost:8000/api/login',forminput)
-           
-          
-            const token = response.data.token;
-            const usertype = response.data.user.usertype; 
-         
-            localStorage.setItem('authToken', token);
-
-            dispatch(checkUserSession({isloggedin:!checklogin,usertype}))
-            if(usertype==='admin'){
-              return navigate('/admin');
-            }else if(usertype==='user'){
-              return navigate('/user');
-            }else if(usertype==='member'){
-              return navigate('/member');
-            }else{
-              return navigate('/');
-            }
-
+            
+            if(response.status===200){
+              const token = response.data.token;
+              const usertype = response.data.user.usertype; 
+              localStorage.setItem('authToken', token);
+                  dispatch(checkUserSession({token,isloggedin:!checklogin,usertype}))
+                if(usertype==='admin'){
+                  return navigate('/admin');
+                }else if(usertype==='user'){
+                  return navigate('/user');
+                }else if(usertype==='member'){
+                  return navigate('/member');
+                }else{
+                  return navigate('/');
+                }
+              }else{
+                console.log("error not able to login");
+              }
           }catch (err) {
             if (err.response) {
               // Log error details if available
@@ -67,8 +67,7 @@ const login = () => {
               alert('An unexpected error occurred.');
             }
           }
-            
-    }
+       }
   
     return (
     <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">

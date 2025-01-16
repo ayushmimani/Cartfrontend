@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import BodyConatiner from '../BodyConatiner'
 import { useDispatch } from 'react-redux'
+import axios from 'axios'
 
 const MemberDashboard = () => { 
 
@@ -24,11 +25,11 @@ const handleImage=(e)=>{
       ...prev,
       image:e.target.files[0]
    }))
-    
 }
-
 const submitform = async (e)=>{
     e.preventDefault();
+
+    const token = localStorage.getItem('authToken');
 
     const formdata =  new FormData();
 
@@ -38,14 +39,20 @@ const submitform = async (e)=>{
     formdata.append('description',product.description);
 
       try {
-        const response = await fetch('http://localhost:8000/api/addproduct', {
-          method: 'POST',
-          body: formdata,
-        });
-        alert(response)
-        if (response.ok) {
+        const response = await axios.post('http://localhost:8000/api/addproduct',
+          formdata,
+         {
+          headers:{
+              'authorization':`Bearer ${token}`,
+              'Content-type':'multipart/form-data'
+          }
+         }
+      );
+        console.log(response);
+        
+        if (response.status===200) {
           alert('Product added successfully!');
-          setProduct({
+          setproduct({
             name: '',
             price: '',
             description: '',
@@ -57,7 +64,7 @@ const submitform = async (e)=>{
       }
    catch (error) {
       console.error('Error:', error);
-      setMessage('An error occurred. Please try again.');
+     
     }
 }
 

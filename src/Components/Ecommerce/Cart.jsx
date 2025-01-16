@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { signOut,getAuth } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 import { Navigate } from 'react-router-dom';
 import { checkUserSession } from '../../Store/AuthSlice';
 
